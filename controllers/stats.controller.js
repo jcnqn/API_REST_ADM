@@ -4,7 +4,6 @@ const Dna = require('../models/dnas.model')
 const statsController = async(req, res = response) => {
 const mutations = await Dna.find();
 const no_mutation = await  Dna.find({result: false});
-    console.log(no_mutation);
 
     res.status(200).json({
         ADN: {
