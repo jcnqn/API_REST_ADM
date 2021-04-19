@@ -21,6 +21,8 @@ dbConnection();
 
 //Routes
 app.use('/mutation', require('./routes/dnas.route'));
+app.use('/stats', require('./routes/stats.route'));
+
 
 
 
