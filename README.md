@@ -190,4 +190,4 @@ supertest: v_6.1.3
 
 _Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
 
-**Julio Cuneo** - *Ingeniero Industrial y Desarrollador Web* -[LinkeIn]( https://www.linkedin.com/in/juliocuneo/)-
+**Julio Cuneo** - *Ingeniero Industrial y Desarrollador Web* -[LinkedIn]( https://www.linkedin.com/in/juliocuneo/)-
