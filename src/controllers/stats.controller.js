@@ -5,7 +5,7 @@ const statsController = async(req, res = response) => {
 const mutations = await Dna.find();
 const no_mutation = await  Dna.find({result: false});
 
-    res.status(200).json({
+    await res.status(200).json({
         ADN: {
             count_mutations: mutations.length,
             count_no_mutation: no_mutation.length,

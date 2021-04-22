@@ -3,26 +3,28 @@ const { dbConnection } = require('./database/config');
 const cors = require('cors');
 require('dotenv').config();
 
-//Create express server
+//Crea el servidor express
 const app = express();
 
-//Config CORS
+//Configurar CORS
 app.use(cors());
 
-//Read and parse JSON
+//Lee y parsea a json
 app.use(express.json())
 
 app.listen(process.env.PORT, () => {
     console.log(`Server on port ${process.env.PORT}`);
 })
 
-//Connect to database
-dbConnection();
+//Conecta a base de datos
+dbConnection()
 
-//Routes
+//Rutas de la api rest
 app.use('/mutation', require('./routes/dnas.route'));
 app.use('/stats', require('./routes/stats.route'));
 
-
+module.exports = {
+    app,
+}
 
 

@@ -1,12 +1,13 @@
 const { response } = require('express');
 const { validateDna } = require("../helpers/validateDna");
 const { hasMutation } = require("../helpers/hasMutation");
-const { dnaControl } = require('../helpers/dnaControl');
 const Dna = require('../models/dnas.model')
 
 const checkDnas = async (req, res = response) =>{
 
     let dna = req.body.dna
+
+    //En caso de que la cadena no sea válida..
 
     if (!validateDna(dna)) {
         res.status(400).json({
@@ -15,14 +16,11 @@ const checkDnas = async (req, res = response) =>{
         })
     }
 
-    if (JSON.stringify(dna).toUpperCase() === JSON.stringify(dnaControl.slice(0,6))) {
-        res.status(400).json({
-            ok: false,
-            msg: 'Cadena de DNA a controlar es idéntica a la original',
-        })
-    }
+    //Se controla si existe mutación
+
     const resp = hasMutation(dna);
 
+    //Si existe mutación
     if (resp){
         const dnaToDB = new Dna({
             dna,
@@ -30,18 +28,19 @@ const checkDnas = async (req, res = response) =>{
         })
 
         try {
-            await dnaToDB.save(()=>{
+            await dnaToDB.save() // Se guarda el registro en mongo
                 res.status(200).json({
                     ok: true,
                     msg: 'Existe mutación',
                 })
-            });
+
         } catch (error) {
             res.status(500).json({
                 ok: false,
                 msg: error,
             })
         }
+        //Si no existe mutación
     } else {
         const dnaToDB = new Dna({
             dna,
@@ -49,7 +48,7 @@ const checkDnas = async (req, res = response) =>{
         })
 
         try {
-            await dnaToDB.save();
+            await dnaToDB.save(); //Se guarda el registro en mongo
             res.status(403).json({
                 ok: false,
                 msg: 'No existe mutación',
