@@ -12,7 +12,7 @@ app.use(cors());
 //Lee y parsea a json
 app.use(express.json())
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log(`Server on port ${process.env.PORT}`);
 })
 
